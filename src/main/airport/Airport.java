@@ -1,0 +1,82 @@
+package airport;
+
+import java.util.ArrayList;
+
+public class Airport {
+
+    private ArrayList<Plane> departures;
+
+    public Airport() {
+
+        departures = new ArrayList<>();
+        for (int i = 0; i <= 23; i++) {
+            departures.add(i, null);
+        }
+    }
+
+    // MODIFIES: this and Plane
+    // EFFECTS: books the plane into the requested departure slot if it is available,
+    //          and lets the plane know the departure time.
+
+    public boolean makeNewDeparture(Plane c, int departureTime) {
+        if (departureTime >= departures.size()) {
+            System.out.println("That departure time is not available.");
+            return true;
+        }
+        System.out.println("Flight " + c.getName() + " is departing at at " + departureTime);
+        departures.set(departureTime, c);
+        c.setDepartureTime(departureTime);
+        return true;
+    }
+
+    // EFFECTS: prints out all the departures.  If the time has not been scheduled, prints "available"
+    public void printDeparturesList() {
+        for (int i = 5; i < departures.size(); i++) {
+            Plane c = departures.get(i);
+            if (c != null) {
+                System.out.print(i + "hrs: ");
+                c.printName();
+            } else {
+                System.out.print(i + "hrs: ");
+                System.out.println(" available ");
+            }
+        }
+    }
+
+    //EFFECTS: returns true if a Plane is found at the departure time.
+    public boolean verifyDeparture(Plane p, int departureTime) {
+        Plane scheduledPlane = departures.get(departureTime);
+        if (scheduledPlane == null) {
+            System.out.println("There is no plane departing at that time");
+            return false;
+        }
+        if (scheduledPlane.getName().equals(p.getName())) {
+            System.out.println("Yes the plane is departing at that time");
+            return true;
+        }
+        return false;
+    }
+
+    //EFFECTS: returns true if the plane is scheduled at the departure time
+    public boolean confirmScheduledPlane(String planeName, int bookingTime) {
+        if (departures.get(bookingTime) != null) {
+            Plane scheduledPlane = departures.get(bookingTime);
+            String scheduledPlaneName = scheduledPlane.getName();
+            boolean isPlaneScheduled = scheduledPlaneName.equals(planeName);
+            return isPlaneScheduled;
+        }
+        return false;
+    }
+
+    //MODIFIES: this and Plane
+    //EFFECTS:  changes the plane scheduled in the list, and let's the Plane know the new departure time.
+    public void changeDeparture(Plane plane, int newTime) {
+        int scheduledTime = plane.getDepartureTime();
+        System.out.print(plane.getName() + "'s time is changing from " + scheduledTime);
+        System.out.println(" to " + newTime);
+        departures.set(scheduledTime, null);
+        departures.set(newTime, plane);
+        plane.setDepartureTime(newTime);
+    }
+
+}

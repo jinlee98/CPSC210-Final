@@ -1,70 +1,49 @@
 package ui;
 
+import airport.Airport;
+import airport.Plane;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class AirportSchedule {
-    private final ArrayList<LogEntry> operationLog;
-    private final Scanner scanner;
+public class AirportSchedule {
 
-    private AirportSchedule() {
-        operationLog = new ArrayList<>();
-        scanner = new Scanner(System.in);
-        processOperations();
-    }
+    public static void main(String[] args)  {
 
-    private void processOperations() {
-        String operation;
-        String exit = "3";
+        String plane = "";
+        int time;
+        String operation = "";
+        Scanner schedule = new Scanner(System.in);
 
-        while (true) {
-            System.out.println("Please select an option " + "([1]add departure, [2]remove departure, or [3]quit):");
-            operation = scanner.nextLine();
-            System.out.println("you selected: " + operation);
+        Airport vancouverInternationalAirport = new Airport();
 
-            if (operation.equals(exit)) {
-                break;
-            }
+        //schedule a departure from the airport
+        System.out.println("-------Welcome to YVR scheduling! Please enter a plane name.--------");
+        Plane p = new Plane(plane);
+        plane = schedule.next();
 
-            int result = processOperation(operation);
-            System.out.println("The departure list is: " + operationLog);
-        }
+        System.out.println("---------Enter departure time.------");
+        time = schedule.nextInt();
 
-        System.out.println("Departure List: " + operationLog);
-    }
+        vancouverInternationalAirport.makeNewDeparture(p, time);
+        vancouverInternationalAirport.verifyDeparture(p, time);
+        vancouverInternationalAirport.confirmScheduledPlane(plane, time);
+        p.confirmDeparture();
 
-    private int processOperation(String operation) {
-        int result = 0;
-        LogEntry logEntry = new LogEntry();
+//        vancouverInternationalAirport.changeDeparture(boeing, 13);
+//        boeing.confirmDeparture();
+//        vancouverInternationalAirport.verifyDeparture(boeing, 13);
 
-        System.out.println("Please enter the departure time.");
-        int firstTime = scanner.nextInt();
-        scanner.nextLine(); //// clears the line;
-        // otherwise the carriage return is taken as the
-        // next input and you get a blank "selected" loop
+//        //find plane departures by name?
+//        System.out.println("---------Which departure are you checking?-------------");
+//
+//        System.out.println("Find Boeing by name? "
+//                + vancouverInternationalAirport.confirmScheduledPlane("Boeing", 13));
 
-        if (operation.equals("1")) {
-            result = firstTime;
-        }
-
-        if (operation.equals("2")) {
-            if (operationLog.size() > 0) {
-                operationLog.remove(0);
-            }
-        }
-
-        logResult(logEntry, operation, result);
-
-        return result;
-    }
-
-    private void logResult(LogEntry logEntry, String operation, int result) {
-        logEntry.setOperation(operation);
-        logEntry.setResult(result);
-        operationLog.add(logEntry);
-    }
-
-    public static void main(String[] args) {
-        new AirportSchedule();
+        //print out the departure list
+        System.out.println("Departures list:");
+        System.out.println("---------------------------------------------");
+        vancouverInternationalAirport.printDeparturesList();
+        System.out.println("---------------------------------------------");
     }
 }

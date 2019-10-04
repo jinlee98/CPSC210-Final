@@ -2,7 +2,7 @@ package airport;
 
 import java.util.ArrayList;
 
-public class Airport {
+public class Airport implements BookingService, Printer {
 
     private ArrayList<Plane> departures;
 
@@ -30,12 +30,12 @@ public class Airport {
     }
 
     // EFFECTS: prints out all the departures.  If the time has not been scheduled, prints "available"
-    public void printDeparturesList() {
+    public void print() {
         for (int i = 5; i < departures.size(); i++) {
             Plane c = departures.get(i);
             if (c != null) {
                 System.out.print(i + "hrs: ");
-                c.printName();
+                c.print();
             } else {
                 System.out.print(i + "hrs: ");
                 System.out.println(" available ");

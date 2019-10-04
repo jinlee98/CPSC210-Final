@@ -4,8 +4,11 @@ import airport.Plane;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AirportTest {
     airport.Airport vancouverInternationalAirport;
@@ -98,6 +101,14 @@ public class AirportTest {
     public void testLatestDeparture() {
         assertTrue(vancouverInternationalAirport.makeNewDeparture(boeing, 23));
         assertTrue(vancouverInternationalAirport.verifyDeparture(boeing, 23));
+    }
+
+    @Test
+    public void saveTest() throws FileNotFoundException {
+        File test = new File("test.txt");
+        Scanner tester = new Scanner(test);
+
+        assertEquals("cheese", tester.nextLine());
     }
 
 }

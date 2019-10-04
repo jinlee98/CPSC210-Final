@@ -1,49 +1,87 @@
 package ui;
 
 import airport.Airport;
+import airport.BookingService;
 import airport.Plane;
-
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class AirportSchedule {
+    private BookingService vancouverInternationalAirport;
+    private Scanner schedule;
+    private List<String> list;
 
-    public static void main(String[] args)  {
+    private AirportSchedule() throws FileNotFoundException {
+        vancouverInternationalAirport = new Airport();
+        schedule = new Scanner(System.in);
+        save();
+    }
+
+    private void save() throws FileNotFoundException {
+        File pa = new File("pa.txt");
+
+        Scanner input = new Scanner(pa);
+        list = new ArrayList<>();
+
+        try {
+            PrintWriter output = new PrintWriter(pa);
+            output.println("-------Welcome to YVR scheduling! Please enter a plane name.--------");
+            output.println("---------Enter departure time.------");
+            output.println("------Book another plane? Yes or no.-------");
+            output.println("--------Departures list:---------");
+            output.close();
+        } catch (IOException ex) {
+            System.out.printf("ERROR: %s\n", ex);
+        }
+        while (input.hasNextLine()) {
+            list.add(input.nextLine());
+        }
+
+        departure();
+    }
+
+    private void departure() {
 
         String plane = "";
         int time;
-        String operation = "";
-        Scanner schedule = new Scanner(System.in);
+        String decision = "";
 
-        Airport vancouverInternationalAirport = new Airport();
+        System.out.println(list.get(0));
 
-        //schedule a departure from the airport
-        System.out.println("-------Welcome to YVR scheduling! Please enter a plane name.--------");
-        Plane p = new Plane(plane);
         plane = schedule.next();
+        Plane p = new Plane(plane);
 
-        System.out.println("---------Enter departure time.------");
+        System.out.println(list.get(1));
+
         time = schedule.nextInt();
 
         vancouverInternationalAirport.makeNewDeparture(p, time);
-        vancouverInternationalAirport.verifyDeparture(p, time);
         vancouverInternationalAirport.confirmScheduledPlane(plane, time);
         p.confirmDeparture();
 
-//        vancouverInternationalAirport.changeDeparture(boeing, 13);
-//        boeing.confirmDeparture();
-//        vancouverInternationalAirport.verifyDeparture(boeing, 13);
+        System.out.println(list.get(2));
 
-//        //find plane departures by name?
-//        System.out.println("---------Which departure are you checking?-------------");
-//
-//        System.out.println("Find Boeing by name? "
-//                + vancouverInternationalAirport.confirmScheduledPlane("Boeing", 13));
+        decision = schedule.next();
+        if (decision.equals("yes")) {
+            departure();
+        } else {
+            print();
+        }
+    }
 
-        //print out the departure list
-        System.out.println("Departures list:");
-        System.out.println("---------------------------------------------");
-        vancouverInternationalAirport.printDeparturesList();
-        System.out.println("---------------------------------------------");
+    private void print() {
+        System.out.println(list.get(3));
+        vancouverInternationalAirport.print();
+    }
+
+    public static void main(String[] args) throws FileNotFoundException {
+
+        new AirportSchedule();
+
     }
 }

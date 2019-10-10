@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 public abstract class Airport implements BookingService, Printer {
 
-    public ArrayList<Plane> departures;
+    public ArrayList<Plane> departuresList;
 
     public Airport() {
 
-        departures = new ArrayList<>();
+        departuresList = new ArrayList<>();
         for (int i = 0; i <= 23; i++) {
-            departures.add(i, null);
+            departuresList.add(i, null);
         }
     }
 
@@ -22,8 +22,8 @@ public abstract class Airport implements BookingService, Printer {
 
     // EFFECTS: prints out all the departures.  If the time has not been scheduled, prints "available"
     public void print() {
-        for (int i = 5; i < departures.size(); i++) {
-            Plane c = departures.get(i);
+        for (int i = 5; i < departuresList.size(); i++) {
+            Plane c = departuresList.get(i);
             if (c != null) {
                 System.out.print(i + "hrs: ");
                 c.print();
@@ -36,7 +36,7 @@ public abstract class Airport implements BookingService, Printer {
 
     //EFFECTS: returns true if a Plane is found at the departure time.
     public boolean verifyDeparture(Plane p, int departureTime) {
-        Plane scheduledPlane = departures.get(departureTime);
+        Plane scheduledPlane = departuresList.get(departureTime);
         if (scheduledPlane == null) {
             System.out.println("There is no plane departing at that time");
             return false;
@@ -50,8 +50,8 @@ public abstract class Airport implements BookingService, Printer {
 
     //EFFECTS: returns true if the plane is scheduled at the departure time
     public boolean confirmScheduledPlane(String planeName, int bookingTime) {
-        if (departures.get(bookingTime) != null) {
-            Plane scheduledPlane = departures.get(bookingTime);
+        if (departuresList.get(bookingTime) != null) {
+            Plane scheduledPlane = departuresList.get(bookingTime);
             String scheduledPlaneName = scheduledPlane.getName();
             boolean isPlaneScheduled = scheduledPlaneName.equals(planeName);
             return isPlaneScheduled;

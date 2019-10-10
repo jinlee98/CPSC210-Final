@@ -1,4 +1,4 @@
-package airport;
+package model;
 
 public interface ControlTower {
     // getters

@@ -1,4 +1,5 @@
--------Welcome to YVR scheduling! Please enter a plane name.--------
----------Enter departure time.------
-------Book another plane? Yes or no.-------
---------Departures list:---------
+-------Welcome to YVR scheduling! Is this an urgent or regular booking?-------
+--------------------------Please enter a plane name.--------------------------
+---------------------------Enter departure time.------------------------------
+----------------------Book another plane? Yes or no.--------------------------
+------------------------------Departures list:--------------------------------

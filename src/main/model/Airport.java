@@ -1,10 +1,10 @@
-package airport;
+package model;
 
 import java.util.ArrayList;
 
-public class Airport implements BookingService, Printer {
+public abstract class Airport implements BookingService, Printer {
 
-    private ArrayList<Plane> departures;
+    public ArrayList<Plane> departures;
 
     public Airport() {
 
@@ -18,16 +18,7 @@ public class Airport implements BookingService, Printer {
     // EFFECTS: books the plane into the requested departure slot if it is available,
     //          and lets the plane know the departure time.
 
-    public boolean makeNewDeparture(Plane c, int departureTime) {
-        if (departureTime >= departures.size()) {
-            System.out.println("That departure time is not available.");
-            return true;
-        }
-        System.out.println("Flight " + c.getName() + " is departing at at " + departureTime);
-        departures.set(departureTime, c);
-        c.setDepartureTime(departureTime);
-        return true;
-    }
+    public abstract boolean makeNewDeparture(Plane c, int departureTime);
 
     // EFFECTS: prints out all the departures.  If the time has not been scheduled, prints "available"
     public void print() {

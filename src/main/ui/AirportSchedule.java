@@ -1,8 +1,7 @@
 package ui;
 
-import airport.Airport;
-import airport.BookingService;
-import airport.Plane;
+import model.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -12,12 +11,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AirportSchedule {
-    private BookingService vancouverInternationalAirport;
+    private BookingService yvr;
+    private BookingService yvrUrgent;
     private Scanner schedule;
     private List<String> list;
 
     private AirportSchedule() throws FileNotFoundException {
-        vancouverInternationalAirport = new Airport();
+        yvr = new RegularFlight();
+        yvrUrgent = new UrgentFlight();
         schedule = new Scanner(System.in);
         save();
     }
@@ -30,10 +31,11 @@ public class AirportSchedule {
 
         try {
             PrintWriter output = new PrintWriter(pa);
-            output.println("-------Welcome to YVR scheduling! Please enter a plane name.--------");
-            output.println("---------Enter departure time.------");
-            output.println("------Book another plane? Yes or no.-------");
-            output.println("--------Departures list:---------");
+            output.println("-------Welcome to YVR scheduling! Is this an urgent or regular booking?-------");
+            output.println("--------------------------Please enter a plane name.--------------------------");
+            output.println("---------------------------Enter departure time.------------------------------");
+            output.println("----------------------Book another plane? Yes or no.--------------------------");
+            output.println("------------------------------Departures list:--------------------------------");
             output.close();
         } catch (IOException ex) {
             System.out.printf("ERROR: %s\n", ex);
@@ -42,7 +44,47 @@ public class AirportSchedule {
             list.add(input.nextLine());
         }
 
+        urgent();
+    }
+
+    private void urgent() {
+        System.out.println(list.get(0));
+
+        String urgent = "";
+        urgent = schedule.next();
+
+        if (urgent == "urgent") {
+            urgentDeparture();
+        }
         departure();
+    }
+
+    private void urgentDeparture() {
+        String plane = "";
+        int time;
+        String decision = "";
+
+        System.out.println(list.get(1));
+
+        plane = schedule.next();
+        Plane p = new Plane(plane);
+
+        System.out.println(list.get(2));
+
+        time = schedule.nextInt();
+
+        yvrUrgent.makeNewDeparture(p, time);
+        yvrUrgent.confirmScheduledPlane(plane, time);
+        p.confirmDeparture();
+
+        System.out.println(list.get(3));
+
+        decision = schedule.next();
+        if (decision.equals("yes")) {
+            urgent();
+        } else {
+            print();
+        }
     }
 
     private void departure() {
@@ -51,32 +93,32 @@ public class AirportSchedule {
         int time;
         String decision = "";
 
-        System.out.println(list.get(0));
+        System.out.println(list.get(1));
 
         plane = schedule.next();
         Plane p = new Plane(plane);
 
-        System.out.println(list.get(1));
+        System.out.println(list.get(2));
 
         time = schedule.nextInt();
 
-        vancouverInternationalAirport.makeNewDeparture(p, time);
-        vancouverInternationalAirport.confirmScheduledPlane(plane, time);
+        yvr.makeNewDeparture(p, time);
+        yvr.confirmScheduledPlane(plane, time);
         p.confirmDeparture();
 
-        System.out.println(list.get(2));
+        System.out.println(list.get(3));
 
         decision = schedule.next();
         if (decision.equals("yes")) {
-            departure();
+            urgent();
         } else {
             print();
         }
     }
 
     private void print() {
-        System.out.println(list.get(3));
-        vancouverInternationalAirport.print();
+        System.out.println(list.get(4));
+        yvr.print();
     }
 
     public static void main(String[] args) throws FileNotFoundException {

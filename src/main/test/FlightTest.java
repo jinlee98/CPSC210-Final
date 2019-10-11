@@ -15,6 +15,25 @@ public abstract class FlightTest {
     Plane boeing;
 
     @Test
+    public void testVerifyForNoPlane() {
+        Plane bad = null;
+        assertFalse(yvr.verifyDeparture(bad, 12));
+    }
+
+    @Test
+    public void testConfirm() {
+        yvr.makeNewDeparture(boeing, 12);
+        assertTrue(yvr.confirmScheduledPlane(boeing.getName(), 12));
+        assertFalse(yvr.confirmScheduledPlane("abc", 14));
+    }
+
+    @Test
+    public void testConfirmDeparture() {
+        boeing.setDepartureTime(12);
+        assertEquals(12, boeing.confirmDeparture());
+    }
+
+    @Test
     public void testScheduleDepartureAtAvailableTime() {
         assertTrue(yvr.makeNewDeparture(boeing, 15));
         assertTrue(yvr.verifyDeparture(boeing, 15));
@@ -93,13 +112,5 @@ public abstract class FlightTest {
     public void testLatestDeparture() {
         assertTrue(yvr.makeNewDeparture(boeing, 23));
         assertTrue(yvr.verifyDeparture(boeing, 23));
-    }
-
-    @Test
-    public void saveTest() throws FileNotFoundException {
-        File test = new File("test.txt");
-        Scanner tester = new Scanner(test);
-
-        assertEquals("abc", tester.nextLine());
     }
 }

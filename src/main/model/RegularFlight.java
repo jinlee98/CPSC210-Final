@@ -11,7 +11,7 @@ public class RegularFlight extends Airport {
             return false;
         }
 
-        if (departures.get(departureTime) != null) {
+        if (departures.get(0) != null) {
             try {
                 throw new AlreadyBookedException();
             } catch (AlreadyBookedException e) {
@@ -23,7 +23,7 @@ public class RegularFlight extends Airport {
         }
         System.out.println("Flight " + p.getName() + " is departing at at " + departureTime);
         departures.set(departureTime, p);
-        p.setTime(departureTime);
+        p.setDepartureTime(departureTime);
         return true;
     }
 }

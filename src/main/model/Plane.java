@@ -17,6 +17,13 @@ public class Plane implements ControlTower, Printer {
         return name;
     }
 
+    // EFFECTS: returns the departureTime of this plane
+    @Override
+    public int confirmDeparture() {
+        System.out.println(name + ": Confirming that we are departing at " + departureTime);
+        return departureTime;
+    }
+
     public int getDepartureTime() {
         return departureTime;
     }
@@ -37,13 +44,5 @@ public class Plane implements ControlTower, Printer {
     public void print() {
         System.out.println(" " + name + " ");
     }
-
-    // EFFECTS: returns the departureTime of this plane
-    @Override
-    public int confirmDeparture() {
-        System.out.println(name + ": Confirming that we are departing at " + departureTime);
-        return departureTime;
-    }
-
-
+    
 }

@@ -11,7 +11,7 @@ public class RegularFlight extends Airport {
             return false;
         }
 
-        if (departures.get(0) != null) {
+        if (departures.get(departureTime) != null) {
             try {
                 throw new AlreadyBookedException();
             } catch (AlreadyBookedException e) {

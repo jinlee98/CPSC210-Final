@@ -18,7 +18,7 @@ public abstract class Airport implements BookingService, Printer {
     // EFFECTS: books the plane into the requested departure slot if it is available,
     //          and lets the plane know the departure time.
 
-    public abstract boolean makeNewDeparture(Plane c, int departureTime);
+    public abstract boolean makeNewDeparture(Plane p, int departureTime);
 
     // EFFECTS: prints out all the departures.  If the time has not been scheduled, prints "available"
     public void print() {

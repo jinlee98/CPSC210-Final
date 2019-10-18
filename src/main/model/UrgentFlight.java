@@ -5,7 +5,7 @@ import exceptions.OutsideTimeRangeException;
 public class UrgentFlight extends Airport {
 
     @Override
-    public boolean makeNewDeparture(Plane c, int departureTime) {
+    public boolean makeNewDeparture(Plane p, int departureTime) {
         if (departureTime >= departures.size()) {
             try {
                 throw new exceptions.OutsideTimeRangeException();
@@ -14,9 +14,9 @@ public class UrgentFlight extends Airport {
                 return false;
             }
         }
-        System.out.println("Flight " + c.getName() + " is departing at at " + departureTime);
-        departures.set(departureTime, c);
-        c.setDepartureTime(departureTime);
+        System.out.println("Flight " + p.getName() + " is departing at at " + departureTime);
+        departures.set(departureTime, p);
+        p.setDepartureTime(departureTime);
         return true;
     }
 }

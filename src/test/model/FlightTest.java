@@ -23,6 +23,12 @@ public abstract class FlightTest {
     }
 
     @Test
+    public void testConfirmDeparture() {
+        boeing.setDepartureTime(12);
+        assertEquals(12, boeing.confirmDeparture());
+    }
+
+    @Test
     public void testScheduleDepartureAtAvailableTime() {
         assertTrue(yvr.makeNewDeparture(boeing, 15));
         assertTrue(yvr.verifyDeparture(boeing, 15));

@@ -1,5 +1,6 @@
 package ui;
 
+import exceptions.AlreadyBookedException;
 import model.*;
 
 import java.io.File;
@@ -62,7 +63,6 @@ public class AirportSchedule {
     private void urgentDeparture() {
         String plane = "";
         int time;
-        String decision = "";
 
         System.out.println(list.get(1));
 
@@ -77,21 +77,13 @@ public class AirportSchedule {
         yvrUrgent.confirmScheduledPlane(plane, time);
         p.confirmDeparture();
 
-        System.out.println(list.get(3));
-
-        decision = schedule.next();
-        if (decision.equals("yes")) {
-            urgent();
-        } else {
-            print();
-        }
+        decide();
     }
 
     private void departure() {
 
         String plane = "";
         int time;
-        String decision = "";
 
         System.out.println(list.get(1));
 
@@ -106,6 +98,11 @@ public class AirportSchedule {
         yvr.confirmScheduledPlane(plane, time);
         p.confirmDeparture();
 
+        decide();
+    }
+
+    private void decide() {
+        String decision = "";
         System.out.println(list.get(3));
 
         decision = schedule.next();

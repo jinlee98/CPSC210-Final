@@ -17,6 +17,10 @@ public class Plane implements ControlTower, Printer {
         return name;
     }
 
+    public int getDepartureTime() {
+        return departureTime;
+    }
+
     @Override
     public int getDepartureTime() {
         return departureTime;

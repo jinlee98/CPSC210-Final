@@ -8,7 +8,6 @@ public class Plane implements Printer, ControlTower {
     public Plane(String name) {
         System.out.println("Scheduling a new Plane called " + name);
         this.name = name;
-        this.departureTime = 0;
     }
 
     // getters

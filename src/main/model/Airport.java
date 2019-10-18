@@ -53,8 +53,7 @@ public abstract class Airport implements BookingService, Printer {
         if (departures.get(bookingTime) != null) {
             Plane scheduledPlane = departures.get(bookingTime);
             String scheduledPlaneName = scheduledPlane.getName();
-            boolean isPlaneScheduled = scheduledPlaneName.equals(planeName);
-            return isPlaneScheduled;
+            return scheduledPlaneName.equals(planeName);
         }
         return false;
     }

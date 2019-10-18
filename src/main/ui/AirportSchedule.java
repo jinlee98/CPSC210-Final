@@ -1,7 +1,6 @@
 package ui;
 
 import model.*;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -50,19 +49,18 @@ public class AirportSchedule {
     private void urgent() {
         System.out.println(list.get(0));
 
-        String urgent = "";
+        String urgent;
         urgent = schedule.next();
 
-        if (urgent == "urgent") {
+        if (urgent.equals("urgent")) {
             urgentDeparture();
         }
         departure();
     }
 
     private void urgentDeparture() {
-        String plane = "";
+        String plane;
         int time;
-        String decision = "";
 
         System.out.println(list.get(1));
 
@@ -77,21 +75,13 @@ public class AirportSchedule {
         yvrUrgent.confirmScheduledPlane(plane, time);
         p.confirmDeparture();
 
-        System.out.println(list.get(3));
-
-        decision = schedule.next();
-        if (decision.equals("yes")) {
-            urgent();
-        } else {
-            print();
-        }
+        decide();
     }
 
     private void departure() {
 
-        String plane = "";
+        String plane;
         int time;
-        String decision = "";
 
         System.out.println(list.get(1));
 
@@ -106,6 +96,11 @@ public class AirportSchedule {
         yvr.confirmScheduledPlane(plane, time);
         p.confirmDeparture();
 
+        decide();
+    }
+
+    private void decide() {
+        String decision;
         System.out.println(list.get(3));
 
         decision = schedule.next();

@@ -49,17 +49,17 @@ public class AirportSchedule {
     private void urgent() {
         System.out.println(list.get(0));
 
-        String urgent = "";
+        String urgent;
         urgent = schedule.next();
 
-        if (urgent == "urgent") {
+        if (urgent.equals("urgent")) {
             urgentDeparture();
         }
         departure();
     }
 
     private void urgentDeparture() {
-        String plane = "";
+        String plane;
         int time;
 
         System.out.println(list.get(1));
@@ -80,7 +80,7 @@ public class AirportSchedule {
 
     private void departure() {
 
-        String plane = "";
+        String plane;
         int time;
 
         System.out.println(list.get(1));
@@ -100,7 +100,7 @@ public class AirportSchedule {
     }
 
     private void decide() {
-        String decision = "";
+        String decision;
         System.out.println(list.get(3));
 
         decision = schedule.next();

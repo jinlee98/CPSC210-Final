@@ -10,5 +10,5 @@ public interface ControlTower {
     void setDepartureTime(int time);
 
     // EFFECTS: returns the departureTime of this plane
-    void confirmDeparture();
+    int confirmDeparture();
 }

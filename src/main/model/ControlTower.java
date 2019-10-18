@@ -6,9 +6,9 @@ public interface ControlTower {
 
     int getDepartureTime();
 
-    int getDepartureTime();
-
     // setters
     void setDepartureTime(int time);
 
+    // EFFECTS: returns the departureTime of this plane
+    int confirmDeparture();
 }

@@ -19,13 +19,6 @@ public class Plane implements ControlTower, Printer {
 
     // EFFECTS: returns the departureTime of this plane
     @Override
-    public int getDepartureTime() {
-        System.out.println(name + ": Confirming that we are departing at " + departureTime);
-        return departureTime;
-    }
-
-    // EFFECTS: returns the departureTime of this plane
-    @Override
     public int confirmDeparture() {
         System.out.println(name + ": Confirming that we are departing at " + departureTime);
         return departureTime;

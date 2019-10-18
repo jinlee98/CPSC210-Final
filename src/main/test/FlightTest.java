@@ -1,4 +1,4 @@
-package model;
+package test;
 
 import model.Plane;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,11 +27,7 @@ public abstract class FlightTest {
         assertFalse(yvr.confirmScheduledPlane("abc", 14));
     }
 
-    @Test
-    public void testConfirmDeparture() {
-        boeing.setDepartureTime(12);
-        assertEquals(12, boeing.confirmDeparture());
-    }
+
 
     @Test
     public void testScheduleDepartureAtAvailableTime() {
@@ -96,10 +92,10 @@ public abstract class FlightTest {
         assertTrue(yvr.verifyDeparture(boeing, 15));
 
         Plane p = new Plane("Just a Plane");
-        assertTrue(yvr.makeNewDeparture(p, 12));
+        assertTrue(yvr.makeNewDeparture(p, 15));
 
-        assertTrue(yvr.verifyDeparture(p, 12));
-        assertFalse(yvr.verifyDeparture(boeing, 12));
+        assertTrue(yvr.verifyDeparture(p, 15));
+        assertFalse(yvr.verifyDeparture(boeing, 15));
     }
 
     @Test

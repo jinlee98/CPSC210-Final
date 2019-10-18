@@ -1,10 +1,10 @@
-package model;
+package test;
 
+import model.Plane;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class UrgentFlightTest extends FlightTest {
     model.Airport yvrUrgent;
@@ -24,10 +24,5 @@ public class UrgentFlightTest extends FlightTest {
         yvr.makeNewDeparture(delta, 15);
         assertTrue(yvrUrgent.makeNewDeparture(boeing, 15));
         assertTrue(yvrUrgent.verifyDeparture(boeing, 15));
-    }
-
-    @Test
-    public void testOutsideTime() {
-        assertFalse(yvrUrgent.makeNewDeparture(boeing, 9999));
     }
 }

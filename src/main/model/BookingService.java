@@ -13,9 +13,5 @@ public interface BookingService {
     //EFFECTS: returns true if the plane is scheduled at the departure time
     boolean confirmScheduledPlane(String planeName, int bookingTime);
 
-    //MODIFIES: this and Plane
-    //EFFECTS:  changes the plane scheduled in the list, and let's the Plane know the new departure time.
-    void changeDeparture(Plane plane, int newTime);
-
     void print();
 }

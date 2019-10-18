@@ -58,15 +58,4 @@ public abstract class Airport implements BookingService, Printer {
         return false;
     }
 
-    //MODIFIES: this and Plane
-    //EFFECTS:  changes the plane scheduled in the list, and let's the Plane know the new departure time.
-    public void changeDeparture(Plane plane, int newTime) {
-        int scheduledTime = plane.getDepartureTime();
-        System.out.print(plane.getName() + "'s time is changing from " + scheduledTime);
-        System.out.println(" to " + newTime);
-        departures.set(scheduledTime, null);
-        departures.set(newTime, plane);
-        plane.setDepartureTime(newTime);
-    }
-
 }

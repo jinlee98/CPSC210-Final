@@ -1,6 +1,6 @@
 package model;
 
-public class Plane implements Printer, ControlTower {
+public class Plane implements ControlTower, Printer {
 
     private String name;
     private int departureTime;
@@ -16,22 +16,6 @@ public class Plane implements Printer, ControlTower {
         return name;
     }
 
-    // EFFECTS: returns the departureTime of this plane
-    @Override
-    public int confirmDeparture() {
-        System.out.println(name + ": Confirming that we are departing at " + departureTime);
-        return departureTime;
-    }
-
-    public int getDepartureTime() {
-        return departureTime;
-    }
-
-    @Override
-    public int getDepartureTime() {
-        return departureTime;
-    }
-
     // setters
     @Override
     public void setDepartureTime(int time) {
@@ -43,5 +27,13 @@ public class Plane implements Printer, ControlTower {
     public void print() {
         System.out.println(" " + name + " ");
     }
+
+    // EFFECTS: returns the departureTime of this plane
+    @Override
+    public int confirmDeparture() {
+        System.out.println(name + ": Confirming that we are departing at " + departureTime);
+        return departureTime;
+    }
+
 
 }

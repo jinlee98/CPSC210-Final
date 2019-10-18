@@ -1,6 +1,6 @@
 package model;
 
-public class Plane implements ControlTower, Printer {
+public class Plane implements Printer {
 
     private String name;
     private int departureTime;
@@ -12,7 +12,6 @@ public class Plane implements ControlTower, Printer {
     }
 
     // getters
-    @Override
     public String getName() {
         return name;
     }
@@ -34,7 +33,6 @@ public class Plane implements ControlTower, Printer {
     }
 
     // setters
-    @Override
     public void setDepartureTime(int time) {
         departureTime = time;
     }

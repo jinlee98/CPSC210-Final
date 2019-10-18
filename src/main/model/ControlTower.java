@@ -1,10 +1,12 @@
 package model;
 
 public interface ControlTower {
-
+    // getters
     String getName();
 
+    // setters
     void setDepartureTime(int time);
 
-    void confirmDeparture();
+    // EFFECTS: returns the departureTime of this plane
+    int confirmDeparture();
 }

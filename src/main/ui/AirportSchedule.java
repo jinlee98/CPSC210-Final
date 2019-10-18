@@ -1,6 +1,5 @@
 package ui;
 
-import exceptions.AlreadyBookedException;
 import model.*;
 
 import java.io.File;
@@ -75,7 +74,7 @@ public class AirportSchedule {
 
         yvrUrgent.makeNewDeparture(p, time);
         yvrUrgent.confirmScheduledPlane(plane, time);
-        p.confirmDeparture();
+        p.getDepartureTime();
 
         decide();
     }
@@ -96,7 +95,7 @@ public class AirportSchedule {
 
         yvr.makeNewDeparture(p, time);
         yvr.confirmScheduledPlane(plane, time);
-        p.confirmDeparture();
+        p.getDepartureTime();
 
         decide();
     }

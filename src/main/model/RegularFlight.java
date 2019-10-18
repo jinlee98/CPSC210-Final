@@ -23,7 +23,7 @@ public class RegularFlight extends Airport {
         }
         System.out.println("Flight " + p.getName() + " is departing at at " + departureTime);
         departures.set(departureTime, p);
-        p.setDepartureTime(departureTime);
+        p.setTime(departureTime);
         return true;
     }
 }

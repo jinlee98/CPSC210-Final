@@ -75,6 +75,7 @@ public class AirportSchedule {
 
         yvrUrgent.makeNewDeparture(p, time);
         yvrUrgent.confirmScheduledPlane(plane, time);
+        p.confirmDeparture();
 
         decide();
     }
@@ -95,6 +96,7 @@ public class AirportSchedule {
 
         yvr.makeNewDeparture(p, time);
         yvr.confirmScheduledPlane(plane, time);
+        p.confirmDeparture();
 
         decide();
     }

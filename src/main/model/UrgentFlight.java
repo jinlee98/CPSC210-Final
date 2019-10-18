@@ -11,6 +11,7 @@ public class UrgentFlight extends Airport {
                 throw new exceptions.OutsideTimeRangeException();
             } catch (OutsideTimeRangeException e) {
                 System.out.println("That departure time is outside allotted time slots.");
+                return false;
             }
         }
         System.out.println("Flight " + c.getName() + " is departing at at " + departureTime);

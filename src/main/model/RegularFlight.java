@@ -18,7 +18,7 @@ public class RegularFlight extends Airport {
                 System.out.println("That departure time is already booked.");
                 return false;
             } finally {
-                System.out.println("Thanks for using our services!");
+                System.out.println("Sorry for the inconvenience! Please pick another time.");
             }
         }
         System.out.println("Flight " + c.getName() + " is departing at at " + departureTime);
@@ -27,4 +27,3 @@ public class RegularFlight extends Airport {
         return true;
     }
 }
-

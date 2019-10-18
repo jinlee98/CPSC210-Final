@@ -1,7 +1,12 @@
 package model;
 
 import model.Plane;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -92,6 +97,7 @@ public abstract class FlightTest {
 
         Plane p = new Plane("Just a Plane");
         assertTrue(yvr.makeNewDeparture(p, 12));
+
         assertTrue(yvr.verifyDeparture(p, 12));
         assertFalse(yvr.verifyDeparture(boeing, 12));
     }

@@ -23,6 +23,6 @@ public class RegularFlightTest extends FlightTest {
         Plane delta = new Plane("Delta");
         yvr.makeNewDeparture(delta, 12);
         assertFalse(yvr.makeNewDeparture(boeing, 12));
-        }
+    }
 
 }

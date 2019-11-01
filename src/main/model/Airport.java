@@ -63,4 +63,11 @@ public abstract class Airport implements BookingService, Printer {
         return false;
     }
 
+    public void removeDeparture(int bookingTime) {
+        departures.remove(bookingTime);
+    }
+
+    public boolean findFlight(Plane p) {
+        return departures.containsValue(p);
+    }
 }

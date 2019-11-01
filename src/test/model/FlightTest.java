@@ -121,4 +121,11 @@ public abstract class FlightTest {
         assertTrue(boeing.equals(yvr.getPlane(10)));
         assertFalse(yvr.getPlane(10).equals(null));
     }
+
+    @Test
+    public void testOneToOne() {
+        yvr.makeNewDeparture(boeing, 10);
+        yvr.removeDeparture(10);
+        assertFalse(yvr.findFlight(boeing));
+    }
 }

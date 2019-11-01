@@ -113,4 +113,12 @@ public abstract class FlightTest {
         assertTrue(yvr.makeNewDeparture(boeing, 23));
         assertTrue(yvr.verifyDeparture(boeing, 23));
     }
+
+    @Test
+    public void testHash() {
+        yvr.makeNewDeparture(boeing, 10);
+        assertSame(boeing, yvr.getPlane(10));
+        assertTrue(boeing.equals(yvr.getPlane(10)));
+        assertFalse(yvr.getPlane(10).equals(null));
+    }
 }

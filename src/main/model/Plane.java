@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 public class Plane implements ControlTower, Printer {
 
     private String name;
@@ -35,5 +37,20 @@ public class Plane implements ControlTower, Printer {
         return departureTime;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Plane plane = (Plane) o;
+        return departureTime == plane.departureTime;
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(departureTime);
+    }
 }

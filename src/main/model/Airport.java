@@ -1,16 +1,17 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class Airport implements BookingService, Printer {
 
-    public ArrayList<Plane> departures;
+    public Map<Integer, Plane> departures;
 
     public Airport() {
 
-        departures = new ArrayList<>();
+        departures = new HashMap<>();
         for (int i = 0; i <= 23; i++) {
-            departures.add(i, null);
+            departures.put(i, null);
         }
     }
 

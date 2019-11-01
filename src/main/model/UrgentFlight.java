@@ -15,7 +15,8 @@ public class UrgentFlight extends Airport {
             }
         }
         System.out.println("Flight " + c.getName() + " is departing at at " + departureTime);
-        departures.set(departureTime, c);
+        departures.remove(departureTime);
+        departures.put(departureTime, c);
         c.setDepartureTime(departureTime);
         return true;
     }

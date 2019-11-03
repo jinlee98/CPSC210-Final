@@ -10,7 +10,7 @@ public class RegularFlightTest extends FlightTest {
     @BeforeEach
     public void setUp() {
         yvr = new model.RegularFlight();
-        boeing = new Plane("Boeing");
+        boeing = new Plane("Boeing", yvr);
     }
 
     @Test
@@ -20,7 +20,7 @@ public class RegularFlightTest extends FlightTest {
 
     @Test
     public void testAlreadyBookedException() {
-        Plane delta = new Plane("Delta");
+        Plane delta = new Plane("Delta", yvr);
         yvr.makeNewDeparture(delta, 12);
         assertFalse(yvr.makeNewDeparture(boeing, 12));
     }

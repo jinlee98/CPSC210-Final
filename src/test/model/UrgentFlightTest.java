@@ -14,8 +14,8 @@ public class UrgentFlightTest extends FlightTest {
     public void setUp() {
         yvr = new model.RegularFlight();
         yvrUrgent = new model.UrgentFlight();
-        boeing = new Plane("Boeing");
-        delta = new Plane("delta");
+        boeing = new Plane("Boeing", yvr);
+        delta = new Plane("delta", yvrUrgent);
     }
 
 

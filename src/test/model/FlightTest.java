@@ -1,12 +1,6 @@
 package model;
 
-import model.Plane;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -42,13 +36,13 @@ public abstract class FlightTest {
     @Test
     public void scheduleMultipleDeparturesOutOfOrder() {
 
-        Plane boeing10 = new Plane("Boeing 10");
+        Plane boeing10 = new Plane("Boeing 10", yvr);
         boolean boeing10Scheduled = yvr.makeNewDeparture(boeing10, 10);
         boolean boeing10Verified = yvr.verifyDeparture(boeing10, 10);
-        Plane airbus9 = new Plane("Airbus 9");
+        Plane airbus9 = new Plane("Airbus 9", yvr);
         boolean airbus9Booked = yvr.makeNewDeparture(airbus9, 9);
         boolean airbus9Verified = yvr.verifyDeparture(airbus9, 9);
-        Plane douglas15 = new Plane("Douglas 15");
+        Plane douglas15 = new Plane("Douglas 15", yvr);
         boolean douglas15Booked = yvr.makeNewDeparture(douglas15, 15);
         boolean douglas15Verified = yvr.verifyDeparture(douglas15, 15);
 
@@ -63,9 +57,9 @@ public abstract class FlightTest {
 
     @Test
     public void scheduleMultipleDeparturesOutOfOrderRefactored() {
-        Plane boeing10 = new Plane("Boeing 10");
-        Plane airbus9 = new Plane("Airbus 9");
-        Plane douglas15 = new Plane("Douglas 15");
+        Plane boeing10 = new Plane("Boeing 10", yvr);
+        Plane airbus9 = new Plane("Airbus 9", yvr);
+        Plane douglas15 = new Plane("Douglas 15", yvr);
 
         boolean boeing10Booked = yvr.makeNewDeparture(boeing10, 10);
         boolean airbus9Booked = yvr.makeNewDeparture(airbus9, 9);
@@ -95,7 +89,7 @@ public abstract class FlightTest {
         assertTrue(madeDeparture);
         assertTrue(yvr.verifyDeparture(boeing, 15));
 
-        Plane p = new Plane("Just a Plane");
+        Plane p = new Plane("Just a Plane", yvr);
         assertTrue(yvr.makeNewDeparture(p, 12));
 
         assertTrue(yvr.verifyDeparture(p, 12));
@@ -127,5 +121,17 @@ public abstract class FlightTest {
         yvr.makeNewDeparture(boeing, 10);
         yvr.removeDeparture(10);
         assertFalse(yvr.findFlight(boeing));
+    }
+
+    @Test
+    public void testGetAirport() {
+        assertSame(yvr, boeing.getAirport());
+    }
+
+    @Test
+    public void testSetAirport() {
+        Airport abbotsford = new RegularFlight();
+        boeing.setAirport(abbotsford);
+        assertSame(abbotsford, boeing.getAirport());
     }
 }

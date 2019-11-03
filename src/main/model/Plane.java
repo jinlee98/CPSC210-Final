@@ -6,10 +6,12 @@ public class Plane implements ControlTower, Printer {
 
     private String name;
     private int departureTime;
+    private Airport airport;
 
-    public Plane(String name) {
+    public Plane(String name, Airport airport) {
         System.out.println("Scheduling a new Plane called " + name);
         this.name = name;
+        this.airport = airport;
     }
 
     // getters
@@ -18,10 +20,20 @@ public class Plane implements ControlTower, Printer {
         return name;
     }
 
+    @Override
+    public Airport getAirport() {
+        return airport;
+    }
+
     // setters
     @Override
     public void setDepartureTime(int time) {
         departureTime = time;
+    }
+
+    @Override
+    public void setAirport(Airport a) {
+        airport = a;
     }
 
     // EFFECTS: prints out the name of this plane on the console

@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AirportSchedule {
-    private BookingService yvr;
-    private BookingService yvrUrgent;
+    private Airport yvr;
+    private Airport yvrUrgent;
     private Scanner schedule;
     private List<String> list;
 
@@ -65,7 +65,7 @@ public class AirportSchedule {
         System.out.println(list.get(1));
 
         plane = schedule.next();
-        Plane p = new Plane(plane);
+        Plane p = new Plane(plane, yvrUrgent);
 
         System.out.println(list.get(2));
 
@@ -86,7 +86,7 @@ public class AirportSchedule {
         System.out.println(list.get(1));
 
         plane = schedule.next();
-        Plane p = new Plane(plane);
+        Plane p = new Plane(plane, yvr);
 
         System.out.println(list.get(2));
 
@@ -94,7 +94,6 @@ public class AirportSchedule {
 
         yvr.makeNewDeparture(p, time);
         yvr.confirmScheduledPlane(plane, time);
-        p.confirmDeparture();
 
         decide();
     }

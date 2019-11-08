@@ -2,7 +2,7 @@ package model;
 
 import java.util.Objects;
 
-public class Plane implements ControlTower, Printer {
+public class Plane implements ControlTower {
 
     private String name;
     private int departureTime;
@@ -37,9 +37,9 @@ public class Plane implements ControlTower, Printer {
     }
 
     // EFFECTS: prints out the name of this plane on the console
-    @Override
-    public void print() {
-        System.out.println(" " + name + " ");
+    public boolean printName() {
+        System.out.println(" " + this.getName() + " ");
+        return true;
     }
 
     // EFFECTS: returns the departureTime of this plane

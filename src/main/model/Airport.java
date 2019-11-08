@@ -3,9 +3,10 @@ package model;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class Airport implements BookingService, Printer {
+public abstract class Airport implements BookingService {
 
     public Map<Integer, Plane> departures;
+    AirportPrinter printer = new AirportPrinter();
 
     public Airport() {
 
@@ -26,39 +27,31 @@ public abstract class Airport implements BookingService, Printer {
     }
 
     // EFFECTS: prints out all the departures.  If the time has not been scheduled, prints "available"
-    public void print() {
-        for (int i = 5; i < departures.size(); i++) {
-            Plane c = departures.get(i);
-            if (c != null) {
-                System.out.print(i + "hrs: ");
-                c.print();
-            } else {
-                System.out.print(i + "hrs: ");
-                System.out.println(" available ");
-            }
-        }
+    public boolean printDepartures() {
+        printer.printDepartures();
+        return true;
     }
 
-    //EFFECTS: returns true if a Plane is found at the departure time.
+    //EFFECTS: returns true if the Plane is found at the departure time.
     public boolean verifyDeparture(Plane p, int departureTime) {
-        Plane scheduledPlane = departures.get(departureTime);
-        if (scheduledPlane == null) {
-            System.out.println("There is no plane departing at that time");
+        if (ifNotBooked(departureTime)) {
             return false;
         }
-        if (scheduledPlane.getName().equals(p.getName())) {
+        return ifBooked(p, departureTime);
+    }
+
+    private boolean ifBooked(Plane p, int departureTime) {
+        if (departures.get(departureTime) == p) {
             System.out.println("Yes the plane is departing at that time");
             return true;
         }
         return false;
     }
 
-    //EFFECTS: returns true if the plane is scheduled at the departure time
-    public boolean confirmScheduledPlane(String planeName, int bookingTime) {
-        if (departures.get(bookingTime) != null) {
-            Plane scheduledPlane = departures.get(bookingTime);
-            String scheduledPlaneName = scheduledPlane.getName();
-            return scheduledPlaneName.equals(planeName);
+    private boolean ifNotBooked(int departureTime) {
+        if (departures.get(departureTime) == null) {
+            System.out.println("There is no plane departing at that time");
+            return true;
         }
         return false;
     }
@@ -69,5 +62,13 @@ public abstract class Airport implements BookingService, Printer {
 
     public boolean findFlight(Plane p) {
         return departures.containsValue(p);
+    }
+
+    public boolean outsideTime(int departureTime) {
+        if (departureTime < 0 || departureTime > 23) {
+            System.out.println("That departure time is outside allotted time slots.");
+            return true;
+        }
+        return false;
     }
 }

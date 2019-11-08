@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public abstract class FlightTest {
-    model.Airport yvr;
+    Airport yvr;
     Plane boeing;
 
     @Test
@@ -14,18 +14,6 @@ public abstract class FlightTest {
         assertFalse(yvr.verifyDeparture(bad, 12));
     }
 
-    @Test
-    public void testConfirm() {
-        yvr.makeNewDeparture(boeing, 12);
-        assertTrue(yvr.confirmScheduledPlane(boeing.getName(), 12));
-        assertFalse(yvr.confirmScheduledPlane("abc", 14));
-    }
-
-    @Test
-    public void testConfirmDeparture() {
-        boeing.setDepartureTime(12);
-        assertEquals(12, boeing.confirmDeparture());
-    }
 
     @Test
     public void testScheduleDepartureAtAvailableTime() {
@@ -97,6 +85,12 @@ public abstract class FlightTest {
     }
 
     @Test
+    public void testConfirmDeparture() {
+        boeing.setDepartureTime(12);
+        assertEquals(12, boeing.confirmDeparture());
+    }
+
+    @Test
     public void testEarliestDeparture() {
         assertTrue(yvr.makeNewDeparture(boeing, 5));
         assertTrue(yvr.verifyDeparture(boeing, 5));
@@ -114,6 +108,9 @@ public abstract class FlightTest {
         assertSame(boeing, yvr.getPlane(10));
         assertTrue(boeing.equals(yvr.getPlane(10)));
         assertFalse(yvr.getPlane(10).equals(null));
+        Plane delta = new Plane("delta", yvr);
+        delta = boeing;
+        assertEquals(delta.confirmDeparture(), 10);
     }
 
     @Test
@@ -133,5 +130,15 @@ public abstract class FlightTest {
         Airport abbotsford = new RegularFlight();
         boeing.setAirport(abbotsford);
         assertSame(abbotsford, boeing.getAirport());
+    }
+
+    @Test
+    public void testPrintName() {
+        assertTrue(boeing.printName());
+    }
+
+    @Test
+    public void testPrinter() {
+        assertTrue(yvr.printDepartures());
     }
 }

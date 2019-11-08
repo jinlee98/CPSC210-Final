@@ -7,11 +7,7 @@ public interface BookingService {
     //          and lets the plane know the departure time.
     boolean makeNewDeparture(Plane c, int departureTime);
 
-    //EFFECTS: returns true if a Plane is found at the departure time.
+    //EFFECTS: returns true if the Plane is found at the departure time.
     boolean verifyDeparture(Plane p, int departureTime);
 
-    //EFFECTS: returns true if the plane is scheduled at the departure time
-    boolean confirmScheduledPlane(String planeName, int bookingTime);
-
-    void print();
 }

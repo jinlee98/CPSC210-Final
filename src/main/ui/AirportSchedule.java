@@ -72,7 +72,7 @@ public class AirportSchedule {
         time = schedule.nextInt();
 
         yvrUrgent.makeNewDeparture(p, time);
-        yvrUrgent.confirmScheduledPlane(plane, time);
+        yvrUrgent.verifyDeparture(p, time);
         p.confirmDeparture();
 
         decide();
@@ -93,7 +93,7 @@ public class AirportSchedule {
         time = schedule.nextInt();
 
         yvr.makeNewDeparture(p, time);
-        yvr.confirmScheduledPlane(plane, time);
+        yvr.verifyDeparture(p, time);
 
         decide();
     }
@@ -112,7 +112,7 @@ public class AirportSchedule {
 
     private void print() {
         System.out.println(list.get(4));
-        yvr.print();
+        yvr.printDepartures();
     }
 
     public static void main(String[] args) throws FileNotFoundException {

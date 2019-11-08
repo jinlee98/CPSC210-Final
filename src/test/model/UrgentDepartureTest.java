@@ -6,14 +6,14 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class UrgentFlightTest extends FlightTest {
+public class UrgentDepartureTest extends FlightTest {
     AirportDeparture yvrUrgent;
     Plane delta;
 
     @BeforeEach
     public void setUp() {
-        yvr = new model.RegularFlight();
-        yvrUrgent = new model.UrgentFlight();
+        yvr = new RegularDeparture();
+        yvrUrgent = new UrgentDeparture();
         boeing = new Plane("Boeing", yvr);
         delta = new Plane("delta", yvrUrgent);
     }

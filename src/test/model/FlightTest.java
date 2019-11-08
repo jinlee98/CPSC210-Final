@@ -127,7 +127,7 @@ public abstract class FlightTest {
 
     @Test
     public void testSetAirport() {
-        AirportDeparture abbotsford = new RegularFlight();
+        AirportDeparture abbotsford = new RegularDeparture();
         boeing.setAirportDeparture(abbotsford);
         assertSame(abbotsford, boeing.getAirportDeparture());
     }

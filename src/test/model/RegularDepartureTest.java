@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class RegularFlightTest extends FlightTest {
+public class RegularDepartureTest extends FlightTest {
 
     @BeforeEach
     public void setUp() {
-        yvr = new model.RegularFlight();
+        yvr = new RegularDeparture();
         boeing = new Plane("Boeing", yvr);
     }
 

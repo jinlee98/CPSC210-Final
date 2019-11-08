@@ -16,8 +16,8 @@ public class AirportSchedule {
     private List<String> list;
 
     private AirportSchedule() throws FileNotFoundException {
-        yvr = new RegularFlight();
-        yvrUrgent = new UrgentFlight();
+        yvr = new RegularDeparture();
+        yvrUrgent = new UrgentDeparture();
         schedule = new Scanner(System.in);
         save();
     }

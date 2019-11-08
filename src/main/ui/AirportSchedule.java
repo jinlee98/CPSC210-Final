@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AirportSchedule {
-    private Airport yvr;
-    private Airport yvrUrgent;
+    private AirportDeparture yvr;
+    private AirportDeparture yvrUrgent;
     private Scanner schedule;
     private List<String> list;
 

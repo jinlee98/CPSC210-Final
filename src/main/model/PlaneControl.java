@@ -1,15 +1,15 @@
 package model;
 
-public interface ControlTower {
+public interface PlaneControl {
     // getters
     String getName();
 
-    Airport getAirport();
+    AirportDeparture getAirportDeparture();
 
     // setters
     void setDepartureTime(int time);
 
-    void setAirport(Airport a);
+    void setAirportDeparture(AirportDeparture a);
 
     // EFFECTS: returns the departureTime of this plane
     int confirmDeparture();

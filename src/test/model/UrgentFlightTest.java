@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UrgentFlightTest extends FlightTest {
-    Airport yvrUrgent;
+    AirportDeparture yvrUrgent;
     Plane delta;
 
     @BeforeEach

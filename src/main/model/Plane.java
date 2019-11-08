@@ -2,16 +2,16 @@ package model;
 
 import java.util.Objects;
 
-public class Plane implements ControlTower {
+public class Plane implements PlaneControl {
 
     private String name;
     private int departureTime;
-    private Airport airport;
+    private AirportDeparture airportDeparture;
 
-    public Plane(String name, Airport airport) {
+    public Plane(String name, AirportDeparture airportDeparture) {
         System.out.println("Scheduling a new Plane called " + name);
         this.name = name;
-        this.airport = airport;
+        this.airportDeparture = airportDeparture;
     }
 
     // getters
@@ -21,8 +21,8 @@ public class Plane implements ControlTower {
     }
 
     @Override
-    public Airport getAirport() {
-        return airport;
+    public AirportDeparture getAirportDeparture() {
+        return airportDeparture;
     }
 
     // setters
@@ -32,8 +32,8 @@ public class Plane implements ControlTower {
     }
 
     @Override
-    public void setAirport(Airport a) {
-        airport = a;
+    public void setAirportDeparture(AirportDeparture a) {
+        airportDeparture = a;
     }
 
     // EFFECTS: prints out the name of this plane on the console

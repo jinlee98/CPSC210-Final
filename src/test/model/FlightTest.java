@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public abstract class FlightTest {
-    Airport yvr;
+    AirportDeparture yvr;
     Plane boeing;
 
     @Test
@@ -122,14 +122,14 @@ public abstract class FlightTest {
 
     @Test
     public void testGetAirport() {
-        assertSame(yvr, boeing.getAirport());
+        assertSame(yvr, boeing.getAirportDeparture());
     }
 
     @Test
     public void testSetAirport() {
-        Airport abbotsford = new RegularFlight();
-        boeing.setAirport(abbotsford);
-        assertSame(abbotsford, boeing.getAirport());
+        AirportDeparture abbotsford = new RegularFlight();
+        boeing.setAirportDeparture(abbotsford);
+        assertSame(abbotsford, boeing.getAirportDeparture());
     }
 
     @Test

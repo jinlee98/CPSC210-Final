@@ -3,12 +3,12 @@ package model;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class Airport implements BookingService {
+public abstract class AirportDeparture implements BookingService {
 
     public Map<Integer, Plane> departures;
     AirportPrinter printer = new AirportPrinter();
 
-    public Airport() {
+    public AirportDeparture() {
 
         departures = new HashMap<>();
         for (int i = 0; i <= 23; i++) {

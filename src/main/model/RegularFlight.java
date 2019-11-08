@@ -1,6 +1,6 @@
 package model;
 
-public class RegularFlight extends Airport {
+public class RegularFlight extends AirportDeparture {
 
     @Override
     public boolean makeNewDeparture(Plane c, int departureTime) {

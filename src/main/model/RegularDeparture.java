@@ -16,6 +16,8 @@ public class RegularDeparture extends AirportDeparture {
         System.out.println("Flight " + c.getName() + " is departing at at " + departureTime);
         departures.put(departureTime, c);
         c.setDepartureTime(departureTime);
+        addObserver(c);
+        notifyObservers(c);
         return true;
     }
 }

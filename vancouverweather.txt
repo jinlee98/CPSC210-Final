@@ -1,0 +1,21 @@
+<current>
+    <city id="6173331" name="Vancouver">
+        <coord lon="-123.12" lat="49.26"/>
+        <country>CA</country>
+        <timezone>-28800</timezone>
+        <sun rise="2019-11-12T15:18:00" set="2019-11-13T00:35:24"/>
+    </city>
+    <temperature value="281.87" min="280.37" max="283.15" unit="kelvin"/>
+    <humidity value="100" unit="%"/>
+    <pressure value="1021" unit="hPa"/>
+    <wind>
+        <speed value="1.5" unit="m/s" name="Calm"/>
+        <gusts/>
+        <direction value="280" code="W" name="West"/>
+    </wind>
+    <clouds value="90" name="overcast clouds"/>
+    <visibility value="2012"/>
+    <precipitation value="0.25" mode="rain" unit="1h"/>
+    <weather number="500" value="light rain" icon="10n"/>
+    <lastupdate value="2019-11-13T05:19:11"/>
+</current>

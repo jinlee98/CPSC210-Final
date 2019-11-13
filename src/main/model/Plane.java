@@ -1,8 +1,10 @@
 package model;
 
+import observer.AirportObserver;
+
 import java.util.Objects;
 
-public class Plane implements PlaneControl {
+public class Plane implements PlaneControl, AirportObserver {
 
     private String name;
     private int departureTime;
@@ -64,5 +66,10 @@ public class Plane implements PlaneControl {
     @Override
     public int hashCode() {
         return Objects.hash(departureTime);
+    }
+
+    @Override
+    public void update(Plane p) {
+        System.out.println(p.getName() + " has been added to the departures list.");
     }
 }

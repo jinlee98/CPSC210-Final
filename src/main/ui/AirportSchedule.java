@@ -47,6 +47,16 @@ public class AirportSchedule {
     }
 
     private void urgent() {
+
+        System.out.println("Current weather report:");
+        try {
+            AirportWeather.checkWeather();
+        } catch (IOException e) {
+            System.out.println("not a good URL");
+        }
+
+
+
         System.out.println(list.get(0));
 
         String urgent;

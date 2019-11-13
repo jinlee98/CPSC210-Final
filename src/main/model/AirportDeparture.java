@@ -1,12 +1,12 @@
 package model;
 
+import observer.Subject;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class AirportDeparture implements BookingService {
+public abstract class AirportDeparture extends Subject implements BookingService {
 
     public Map<Integer, Plane> departures;
-    AirportPrinter printer = new AirportPrinter();
 
     public AirportDeparture() {
 
@@ -28,7 +28,16 @@ public abstract class AirportDeparture implements BookingService {
 
     // EFFECTS: prints out all the departures.  If the time has not been scheduled, prints "available"
     public boolean printDepartures() {
-        printer.printDepartures();
+        for (int i = 5; i < departures.size(); i++) {
+            Plane c = departures.get(i);
+            if (c != null) {
+                System.out.print(i + "hrs: ");
+                c.printName();
+            } else {
+                System.out.print(i + "hrs: ");
+                System.out.println(" available ");
+            }
+        }
         return true;
     }
 

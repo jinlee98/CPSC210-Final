@@ -11,6 +11,8 @@ public class UrgentDeparture extends AirportDeparture {
         departures.remove(departureTime);
         departures.put(departureTime, c);
         c.setDepartureTime(departureTime);
+        addObserver(c);
+        notifyObservers(c);
         return true;
     }
 }

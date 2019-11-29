@@ -9,7 +9,6 @@ public class AirportDeparture extends Subject {
     public Map<Integer, Plane> departures;
 
     public AirportDeparture() {
-
         departures = new HashMap<>();
         for (int i = 0; i <= 23; i++) {
             departures.put(i, null);

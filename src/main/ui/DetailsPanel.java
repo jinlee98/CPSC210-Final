@@ -5,6 +5,8 @@ import javax.swing.event.EventListenerList;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.PrintStream;
+
 import model.*;
 
 public class DetailsPanel extends JPanel {
@@ -32,16 +34,17 @@ public class DetailsPanel extends JPanel {
 
         JButton addBtn = new JButton("Schedule Plane");
 
-        plane = new Plane(nameField.getText(), yvr);
+        plane = new Plane("", yvr);
 
         addBtn.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
 
-                String urgency = urgencyField.getText();
+                String name = nameField.getText();
                 String time = timeField.getText();
 
-                if (urgency.equals("regular")) {
+                plane.setName(name);
+                if (urgencyField.getText().equals("regular")) {
                     if (yvr.makeRegDeparture(plane, makeInt(time))) {
                         yvr.makeRegDeparture(plane, makeInt(time));
                         fireDetailEvent(new DetailEvent(this, "Regular flight booked at " + time + "\n"));
@@ -133,5 +136,20 @@ public class DetailsPanel extends JPanel {
 
     public void removeDetailListener(DetailListener listener) {
         listenerList.remove(DetailListener.class, listener);
+    }
+
+    public void printDepartures() {
+        StringBuilder str = new StringBuilder();
+
+        for (int i = 5; i < yvr.departures.size(); i++) {
+            Plane c = yvr.departures.get(i);
+            if (c != null) {
+                str.append("\n").append(i).append(" hrs: " + c.getName());
+            } else {
+                str.append("\n").append(i).append("hrs: available ");
+            }
+        }
+
+        fireDetailEvent(new DetailEvent(this, str.toString()));
     }
 }

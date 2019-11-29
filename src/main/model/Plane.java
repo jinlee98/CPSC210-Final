@@ -38,6 +38,10 @@ public class Plane implements PlaneControl, AirportObserver {
         airportDeparture = a;
     }
 
+    public void setName(String str) {
+        name = str;
+    }
+
     // EFFECTS: prints out the name of this plane on the console
     public boolean printName() {
         System.out.println(" " + this.getName() + " ");

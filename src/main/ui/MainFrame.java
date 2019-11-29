@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import model.*;
 
 public class MainFrame extends JFrame {
 
@@ -19,6 +18,12 @@ public class MainFrame extends JFrame {
         // Create Swing components
         final JTextArea textArea = new JTextArea();
         JButton button = new JButton("Print Schedule");
+
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                detailsPanel.printDepartures();
+            }
+        });
 
         detailsPanel = new DetailsPanel();
 

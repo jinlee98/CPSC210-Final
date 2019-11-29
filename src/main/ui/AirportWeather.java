@@ -13,7 +13,7 @@ public class AirportWeather {
         BufferedReader br = null;
 
         try {
-            String theURL = "http://api.openweathermap.org/data/2.5/weather?q=Vancouver,ca&APPID=909101648ea24d2ff6d2ebeb77ad8fef";
+            String theURL = "http://api.openweathermap.org/data/2.5/weather?q=Vancouver,ca&mode=xml&APPID=909101648ea24d2ff6d2ebeb77ad8fef";
             URL url = new URL(theURL);
             br = new BufferedReader(new InputStreamReader(url.openStream()));
 

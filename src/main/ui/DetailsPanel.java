@@ -1,11 +1,20 @@
 package ui;
 
+import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import javax.swing.event.EventListenerList;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.PrintStream;
+import java.awt.Desktop;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import model.*;
 
@@ -13,14 +22,25 @@ public class DetailsPanel extends JPanel {
 
     private EventListenerList listenerList = new EventListenerList();
     private AirportDeparture yvr = new AirportDeparture();
-    private Plane plane;
+    private BufferedImage image;
 
     public DetailsPanel() {
         Dimension size = getPreferredSize();
         size.width = 400;
         setPreferredSize(size);
+        setOpaque(true);
+        setBackground(Color.PINK);
 
         setBorder(BorderFactory.createTitledBorder("Plane details"));
+
+        try {
+            image = ImageIO.read(new File("C:\\Users\\JKL95\\Desktop\\"
+                    + "project_a3i2b\\src\\main\\ui\\vancouver_international_airport_logo.png"));
+        } catch (IOException e) {
+            System.out.println("Can't find file");
+        }
+
+        JLabel picLabel = new JLabel(new ImageIcon(image));
 
         JLabel intro = new JLabel("Welcome to YVR flight booking! ");
         JLabel prompt = new JLabel("Please enter information: ");
@@ -34,8 +54,6 @@ public class DetailsPanel extends JPanel {
 
         JButton addBtn = new JButton("Schedule Plane");
 
-        plane = new Plane("", yvr);
-
         addBtn.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
@@ -43,7 +61,8 @@ public class DetailsPanel extends JPanel {
                 String name = nameField.getText();
                 String time = timeField.getText();
 
-                plane.setName(name);
+                Plane plane = new Plane(name, yvr);
+
                 if (urgencyField.getText().equals("regular")) {
                     if (yvr.makeRegDeparture(plane, makeInt(time))) {
                         yvr.makeRegDeparture(plane, makeInt(time));
@@ -59,6 +78,27 @@ public class DetailsPanel extends JPanel {
                         fireDetailEvent(new DetailEvent(this, "This time is not available \n"));
                     }
                 }
+            }
+        });
+
+        JButton weatherButton = new JButton("Click for Current Weather");
+
+        try {
+            Image img = ImageIO.read(new File("C:\\Users\\JKL95\\Desktop\\project_a3i2b\\"
+                    + "src\\main\\ui\\sunicon.png"));
+            weatherButton.setIcon(new ImageIcon(img));
+        } catch (IOException ioe) {
+            System.out.println("Image not found");
+        }
+
+        weatherButton.addActionListener(e -> {
+            Desktop d = Desktop.getDesktop();
+            playClick();
+
+            try {
+                d.browse(new URI("http://api.openweathermap.org/data/2.5/weather?q=Vancouver,ca&mode=xml&APPID=909101648ea24d2ff6d2ebeb77ad8fef"));
+            } catch (IOException | URISyntaxException ex) {
+                ex.printStackTrace();
             }
         });
 
@@ -107,12 +147,25 @@ public class DetailsPanel extends JPanel {
         gc.gridy = 4;
         add(timeField, gc);
 
-        // Final Row //
+        // Final Rows //
         gc.weighty = 10;
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
         gc.gridx = 1;
         gc.gridy = 5;
         add(addBtn, gc);
+
+
+        gc.weighty = 15;
+        gc.anchor = GridBagConstraints.FIRST_LINE_START;
+        gc.gridx = 1;
+        gc.gridy = 6;
+        add(weatherButton, gc);
+
+        gc.weighty = 25;
+        gc.anchor = GridBagConstraints.SOUTH;
+        gc.gridx = 1;
+        gc.gridy = 8;
+        add(picLabel, gc);
 
     }
 
@@ -134,10 +187,6 @@ public class DetailsPanel extends JPanel {
         listenerList.add(DetailListener.class, listener);
     }
 
-    public void removeDetailListener(DetailListener listener) {
-        listenerList.remove(DetailListener.class, listener);
-    }
-
     public void printDepartures() {
         StringBuilder str = new StringBuilder();
 
@@ -151,5 +200,17 @@ public class DetailsPanel extends JPanel {
         }
 
         fireDetailEvent(new DetailEvent(this, str.toString()));
+    }
+
+    public void playClick() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("C:\\Users"
+                    + "\\JKL95\\Desktop\\project_a3i2b\\src\\main\\ui\\ClickEffect.wav").getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception ex) {
+            System.out.println("Error with playing sound.");
+        }
     }
 }

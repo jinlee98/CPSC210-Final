@@ -4,7 +4,7 @@ import observer.Subject;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class AirportDeparture extends Subject implements BookingService {
+public class AirportDeparture extends Subject {
 
     public Map<Integer, Plane> departures;
 
@@ -15,12 +15,6 @@ public abstract class AirportDeparture extends Subject implements BookingService
             departures.put(i, null);
         }
     }
-
-    // MODIFIES: this and Plane
-    // EFFECTS: books the plane into the requested departure slot if it is available,
-    //          and lets the plane know the departure time.
-
-    public abstract boolean makeNewDeparture(Plane c, int departureTime);
 
     public Plane getPlane(int departureTime) {
         return departures.get(departureTime);
@@ -79,5 +73,43 @@ public abstract class AirportDeparture extends Subject implements BookingService
             return true;
         }
         return false;
+    }
+
+    // MODIFIES: this and Plane
+    // EFFECTS: books the plane into the requested departure slot if it is available,
+    //          and lets the plane know the departure time.
+
+    public boolean makeRegDeparture(Plane c, int departureTime) {
+        if (outsideTime(departureTime)) {
+            return false;
+        }
+
+        if (departures.get(departureTime) != null) {
+            System.out.println("That departure time is already booked.");
+            System.out.println("Sorry for the inconvenience! Please pick another time.");
+            return false;
+        }
+        System.out.println("Flight " + c.getName() + " is departing at at " + departureTime);
+        departures.put(departureTime, c);
+        c.setDepartureTime(departureTime);
+        addObserver(c);
+        notifyObservers(c);
+        return true;
+    }
+
+    // MODIFIES: this and Plane
+    // EFFECTS: books the plane into the requested departure slot regardless of availability,
+    //          and lets the plane know the departure time.
+    public boolean makeUrgDeparture(Plane c, int departureTime) {
+        if (outsideTime(departureTime)) {
+            return false;
+        }
+        System.out.println("Flight " + c.getName() + " is departing at at " + departureTime);
+        departures.remove(departureTime);
+        departures.put(departureTime, c);
+        c.setDepartureTime(departureTime);
+        addObserver(c);
+        notifyObservers(c);
+        return true;
     }
 }

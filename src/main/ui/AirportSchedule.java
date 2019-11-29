@@ -1,6 +1,7 @@
 package ui;
 
 import model.*;
+import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,16 +10,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class AirportSchedule {
+
+    public static final int WIDTH = 850;
+    public static final int HEIGHT = 600;
     private AirportDeparture yvr;
-    private AirportDeparture yvrUrgent;
     private Scanner schedule;
     private List<String> list;
 
-    private AirportSchedule() throws FileNotFoundException {
-        yvr = new RegularDeparture();
-        yvrUrgent = new UrgentDeparture();
+    private AirportSchedule() throws FileNotFoundException    {
+        yvr = new AirportDeparture();
         schedule = new Scanner(System.in);
+        System.out.println("Current weather report:");
+        try {
+            AirportWeather.checkWeather();
+        } catch (IOException e) {
+            System.out.println("not a good URL");
+        }
         save();
     }
 
@@ -47,16 +56,6 @@ public class AirportSchedule {
     }
 
     private void urgent() {
-
-        System.out.println("Current weather report:");
-        try {
-            AirportWeather.checkWeather();
-        } catch (IOException e) {
-            System.out.println("not a good URL");
-        }
-
-
-
         System.out.println(list.get(0));
 
         String urgent;
@@ -75,14 +74,14 @@ public class AirportSchedule {
         System.out.println(list.get(1));
 
         plane = schedule.next();
-        Plane p = new Plane(plane, yvrUrgent);
+        Plane p = new Plane(plane, yvr);
 
         System.out.println(list.get(2));
 
         time = schedule.nextInt();
 
-        yvrUrgent.makeNewDeparture(p, time);
-        yvrUrgent.verifyDeparture(p, time);
+        yvr.makeUrgDeparture(p, time);
+        yvr.verifyDeparture(p, time);
         p.confirmDeparture();
 
         decide();
@@ -102,7 +101,7 @@ public class AirportSchedule {
 
         time = schedule.nextInt();
 
-        yvr.makeNewDeparture(p, time);
+        yvr.makeRegDeparture(p, time);
         yvr.verifyDeparture(p, time);
 
         decide();
@@ -123,9 +122,19 @@ public class AirportSchedule {
     private void print() {
         System.out.println(list.get(4));
         yvr.printDepartures();
+        System.exit(0);
     }
 
     public static void main(String[] args) throws FileNotFoundException {
+
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                JFrame frame = new MainFrame("Airport Schedule");
+                frame.setSize(WIDTH, HEIGHT);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setVisible(true);
+            }
+        });
 
         new AirportSchedule();
 

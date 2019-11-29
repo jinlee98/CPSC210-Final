@@ -55,6 +55,7 @@ public class Plane implements PlaneControl, AirportObserver {
         return departureTime;
     }
 
+    //EFFECTS: hash equals
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -72,6 +73,7 @@ public class Plane implements PlaneControl, AirportObserver {
         return Objects.hash(departureTime);
     }
 
+    //EFFECTS: updates observers by printing out a message
     @Override
     public void update(Plane p) {
         System.out.println(p.getName() + " has been added to the departures list.");

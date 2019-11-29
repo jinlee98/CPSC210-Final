@@ -56,6 +56,7 @@ public class DetailsPanel extends JPanel {
 
         addBtn.addActionListener(new ActionListener() {
 
+            //EFFECTS: options for the list of responses by the system when clicking addBtn
             public void actionPerformed(ActionEvent e) {
 
                 String name = nameField.getText();
@@ -169,10 +170,12 @@ public class DetailsPanel extends JPanel {
 
     }
 
+    //EFFECTS: turns string to int
     public int makeInt(String s) {
         return Integer.parseInt(s);
     }
 
+    //EFFECTS: acts over the listeners to increase length if an event has occurred
     public void fireDetailEvent(DetailEvent event) {
         Object[] listeners = listenerList.getListenerList();
 
@@ -183,10 +186,13 @@ public class DetailsPanel extends JPanel {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: add listener to the list of listeners
     public void addDetailListener(DetailListener listener) {
         listenerList.add(DetailListener.class, listener);
     }
 
+    //EFFECTS: prints the list of departures in the text box on the right
     public void printDepartures() {
         StringBuilder str = new StringBuilder();
 
@@ -202,6 +208,7 @@ public class DetailsPanel extends JPanel {
         fireDetailEvent(new DetailEvent(this, str.toString()));
     }
 
+    //EFFECTS: the sound that plays as a response to clicking a button
     public void playClick() {
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("C:\\Users"

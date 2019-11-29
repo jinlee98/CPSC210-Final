@@ -5,8 +5,6 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 
 public class MainFrame extends JFrame {
@@ -46,6 +44,7 @@ public class MainFrame extends JFrame {
         this.playMusic();
     }
 
+    //EFFECTS: turns on some music when the application is launched
     public void playMusic() {
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("C:\\Users\\JKL95\\"
@@ -58,6 +57,7 @@ public class MainFrame extends JFrame {
         }
     }
 
+    //EFFECTS: the sound that plays in response to clicking a button
     public void playClick() {
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("C:\\Users"

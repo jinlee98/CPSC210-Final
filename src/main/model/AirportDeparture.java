@@ -42,6 +42,7 @@ public class AirportDeparture extends Subject {
         return ifBooked(p, departureTime);
     }
 
+    //EFFECTS: returns true and prints message if plane is departing at that time
     private boolean ifBooked(Plane p, int departureTime) {
         if (departures.get(departureTime) == p) {
             System.out.println("Yes the plane is departing at that time");
@@ -50,6 +51,7 @@ public class AirportDeparture extends Subject {
         return false;
     }
 
+    //EFFECTS: returns true and prints message if plane is not departing at that time
     private boolean ifNotBooked(int departureTime) {
         if (departures.get(departureTime) == null) {
             System.out.println("There is no plane departing at that time");
@@ -58,16 +60,21 @@ public class AirportDeparture extends Subject {
         return false;
     }
 
+    //MODIFIES: this
+    //EFFECTS: removes a plane from departure list at the given time
     public void removeDeparture(int bookingTime) {
         departures.remove(bookingTime);
     }
 
+    //MODIFIES: this
+    //EFFECTS: returns the time of departure given a certain plane
     public boolean findFlight(Plane p) {
         return departures.containsValue(p);
     }
 
+    //EFFECTS: returns true and prints message if given time is outside the given time constraints of the airport
     public boolean outsideTime(int departureTime) {
-        if (departureTime < 0 || departureTime > 23) {
+        if (departureTime < 5 || departureTime > 23) {
             System.out.println("That departure time is outside allotted time slots.");
             return true;
         }
@@ -77,7 +84,6 @@ public class AirportDeparture extends Subject {
     // MODIFIES: this and Plane
     // EFFECTS: books the plane into the requested departure slot if it is available,
     //          and lets the plane know the departure time.
-
     public boolean makeRegDeparture(Plane c, int departureTime) {
         if (outsideTime(departureTime)) {
             return false;
